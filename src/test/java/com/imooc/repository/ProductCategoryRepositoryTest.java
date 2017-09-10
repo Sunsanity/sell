@@ -1,11 +1,16 @@
 package com.imooc.repository;
 
 import com.imooc.dataobject.ProductCategory;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -22,22 +27,27 @@ public class ProductCategoryRepositoryTest {
 
     @Test
     public void findOneTest(){
-        ProductCategory productCategory = productCategoryRepository.findOne(1);
+        ProductCategory productCategory = productCategoryRepository.findOne(2);
         System.out.println(productCategory.toString());
     }
 
     @Test
     public void insertTest(){
-        ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryName("女生最爱");
-        productCategory.setCategoryType(3);
+        ProductCategory productCategory = new ProductCategory("女生最爱",3);
+        ProductCategory result = productCategoryRepository.save(productCategory);
+        Assert.assertNotNull(result);
+}
+
+    @Test
+    public void updateTest(){
+        ProductCategory productCategory = productCategoryRepository.findOne(3);
+        productCategory.setCategoryType(111);
         productCategoryRepository.save(productCategory);
     }
 
     @Test
-    public void updateTest(){
-        ProductCategory productCategory = productCategoryRepository.findOne(2);
-        productCategory.setCategoryType(888);
-        productCategoryRepository.save(productCategory);
+    public void findByCategoryTypeIn(){
+        List<ProductCategory> list = productCategoryRepository.findByCategoryTypeIn(Arrays.asList(1,2,3));
+        Assert.assertNotEquals(0,list.size());
     }
 }
