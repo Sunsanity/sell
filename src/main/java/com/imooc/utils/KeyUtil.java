@@ -11,7 +11,7 @@ public class KeyUtil {
      * 生成唯一字符串用于设置主键
      * @return
      */
-    public static String genUniqueKey(){
+    public static synchronized String genUniqueKey(){
         Random random = new Random();
         Integer number = random.nextInt(900000) + 100000;
 
