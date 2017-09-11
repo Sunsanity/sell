@@ -13,8 +13,8 @@ public interface OrderService {
     /**创建订单*/
     OrderDTO createOrder(OrderDTO orderDTO);
 
-    /**根据openid查询单个订单*/
-    OrderDTO findOne(String openId);
+    /**根据orderId查询单个订单*/
+    OrderDTO findOne(String orderId);
 
     /**根据openid分页查询订单列表*/
     Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);

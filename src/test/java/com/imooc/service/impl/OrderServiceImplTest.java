@@ -2,12 +2,16 @@ package com.imooc.service.impl;
 
 import com.imooc.dataobject.OrderDetail;
 import com.imooc.dto.OrderDTO;
+import com.imooc.enums.OrderStatusEnum;
+import com.imooc.enums.PayStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -26,14 +30,14 @@ public class OrderServiceImplTest {
     @Autowired
     private OrderServiceImpl orderService;
 
-    private final String openid = "520";
+    private final String OPEN_ID = "520";
 
     @Test
     public void testCreateOrder() throws Exception {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setBuyerName("张微");
         orderDTO.setBuyerAddress("哈尔滨");
-        orderDTO.setBuyerOpenid(openid);
+        orderDTO.setBuyerOpenid(OPEN_ID);
         orderDTO.setBuyerPhone("13269907291");
 
         List<OrderDetail> orderDetailList = new ArrayList<>();
@@ -55,31 +59,42 @@ public class OrderServiceImplTest {
 
     @Test
     public void testFindOne() throws Exception {
-
+        OrderDTO orderDTO = orderService.findOne("1505048096090725362");
+        Assert.assertNotNull(orderDTO.getOrderDetailList());
     }
 
     @Test
     public void testFindList() throws Exception {
-
+        PageRequest pageRequest = new PageRequest(0,2);
+        Page<OrderDTO> orderDTOList = orderService.findList(OPEN_ID,pageRequest);
+        Assert.assertNotEquals(0,orderDTOList.getTotalElements());
     }
 
     @Test
     public void testPaid() throws Exception {
-
+        OrderDTO orderDTO = orderService.findOne("1505048096090725362");
+        OrderDTO result = orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(),result.getPayStatus());
     }
 
     @Test
     public void testFinish() throws Exception {
-
+        OrderDTO orderDTO = orderService.findOne("1505048096090725362");
+        OrderDTO result = orderService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(),result.getOrderStatus());
     }
 
     @Test
     public void testCancel() throws Exception {
-
+        OrderDTO orderDTO = orderService.findOne("1505048096090725362");
+        OrderDTO result = orderService.cancel(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(),result.getOrderStatus());
     }
 
     @Test
     public void testFindList1() throws Exception {
-
+        PageRequest pageRequest = new PageRequest(0,3);
+        Page<OrderDTO> result = orderService.findList(pageRequest);
+        Assert.assertTrue(result.getTotalElements()>0);
     }
 }

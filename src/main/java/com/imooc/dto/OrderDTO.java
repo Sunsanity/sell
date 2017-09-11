@@ -13,6 +13,9 @@ import java.util.List;
 @Data
 public class OrderDTO {
 
+    //订单号
+    private String orderId;
+
     /** 买家名字. */
     private String buyerName;
 

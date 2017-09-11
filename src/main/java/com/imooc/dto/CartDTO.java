@@ -17,4 +17,7 @@ public class CartDTO {
         this.productId = productId;
         this.productQuantity = productQuantity;
     }
+    public CartDTO() {
+    }
+
 }
