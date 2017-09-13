@@ -17,6 +17,7 @@ public enum ResultEnum {
     ORDER_DETAIL_EMPTY(16,"订单详情为空"),
     ORDER_PARAM_ERROR(17,"参数错误"),
     PARAM_TRANSFER_ERROR(18,"参数转换错误"),
+    ORDER_OWNER_ERROR(19,"订单不属于当前用户"),
     ;
 
     private Integer code;
