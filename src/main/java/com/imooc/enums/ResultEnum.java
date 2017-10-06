@@ -19,6 +19,7 @@ public enum ResultEnum {
     PARAM_TRANSFER_ERROR(18,"参数转换错误"),
     ORDER_OWNER_ERROR(19,"订单不属于当前用户"),
     WECHAT_MP_ERROR(20,"微信公众号异常"),
+    WECHAT_PAY_AMOUNT_ERROR(21,"支付订单金额不一致"),
     ;
 
     private Integer code;
