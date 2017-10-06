@@ -3,8 +3,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.0.115/sell?characterEncoding=utf-8&useSSL=false
+    #url: jdbc:mysql://192.168.0.115/sell?characterEncoding=utf-8&useSSL=false
     #url: jdbc:mysql://192.168.1.101/sell?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://172.26.88.14/sell?characterEncoding=utf-8&useSSL=false
   jpa:
     show-sql: true
   jackson:
@@ -17,5 +18,5 @@ wechat:
   mchId: 1483469312
   mchKey: 06C56A89949D617xxxxxxxxxxx
   keyPath: /var/weixin_cert/h5.p12
-  #需要配置内网穿透
+  #需要配置内网穿透异步通知地址
   notifyUrl: http://sell.natapp4.cc/sell/pay/notify
