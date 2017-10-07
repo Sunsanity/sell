@@ -20,6 +20,8 @@ public enum ResultEnum {
     ORDER_OWNER_ERROR(19,"订单不属于当前用户"),
     WECHAT_MP_ERROR(20,"微信公众号异常"),
     WECHAT_PAY_AMOUNT_ERROR(21,"支付订单金额不一致"),
+    CANCEL_ORDER_SUCCESS(22,"取消订单成功"),
+    FINISH_ORDER_SUCCESS(23,"完结订单成功"),
     ;
 
     private Integer code;
