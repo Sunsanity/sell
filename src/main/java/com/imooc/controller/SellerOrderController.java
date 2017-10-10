@@ -64,7 +64,7 @@ public class SellerOrderController {
             return new ModelAndView("common/error",map);
         }
         map.put("msg", ResultEnum.CANCEL_ORDER_SUCCESS.getMessage());
-        map.put("url","sell/seller/order/list");
+        map.put("url","/sell/seller/order/list");
         return new ModelAndView("common/success",map);
     }
 
@@ -107,7 +107,7 @@ public class SellerOrderController {
             return new ModelAndView("common/error",map);
         }
         map.put("msg", ResultEnum.FINISH_ORDER_SUCCESS.getMessage());
-        map.put("url","sell/seller/order/list");
+        map.put("url","/sell/seller/order/list");
         return new ModelAndView("common/success",map);
     }
 }

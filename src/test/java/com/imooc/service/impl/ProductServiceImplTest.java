@@ -61,4 +61,16 @@ public class ProductServiceImplTest {
         ProductInfo productInfo1 = productService.save(productInfo);
         Assert.assertNotNull(productInfo1);
     }
+
+    @Test
+    public void testOnSale() throws Exception {
+        ProductInfo productInfo = productService.onSale("123123");
+        Assert.assertEquals(ProductStatusEnum.UP,productInfo.getProductStatusEnum());
+    }
+
+    @Test
+    public void testOffSale() throws Exception {
+        ProductInfo productInfo = productService.offSale("123123");
+        Assert.assertEquals(ProductStatusEnum.DOWN,productInfo.getProductStatusEnum());
+    }
 }
