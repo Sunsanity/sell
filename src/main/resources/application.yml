@@ -15,8 +15,15 @@ server:
 wechat:
   mpAppId: wx2916527695e31493
   mpAppSecret: 2b915f13b45590d64f2c89eeea521980
+  openAppId: wx6ad144e54af67d87
+  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e
   mchId: 1483469312
   mchKey: 06C56A89949D617xxxxxxxxxxx
   keyPath: /var/weixin_cert/h5.p12
   #需要配置内网穿透异步通知地址，异步通知用于微信端支付成功后访问地址，会传递一些结果给程序，程序可以根据结果考虑是否修改支付的订单状态
   notifyUrl: http://sell.natapp4.cc/sell/pay/notify
+
+projectUrl:
+  wechatMpAuthorize: http://7qsfr4.natappfree.cc
+  wechatOpenAuthorize: http://7qsfr4.natappfree.cc
+  sell: http://7qsfr4.natappfree.cc
