@@ -9,12 +9,14 @@ import com.imooc.dto.OrderDTO;
 import com.imooc.enums.OrderStatusEnum;
 import com.imooc.enums.PayStatusEnum;
 import com.imooc.enums.ResultEnum;
+import com.imooc.exception.ResponseBankException;
 import com.imooc.exception.SellException;
 import com.imooc.repository.OrderDetailRepository;
 import com.imooc.repository.OrderMasterRepository;
 import com.imooc.service.OrderService;
 import com.imooc.service.PayService;
 import com.imooc.service.ProductService;
+import com.imooc.service.PushMessageService;
 import com.imooc.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -37,17 +39,16 @@ import java.util.List;
 @Slf4j
 public class OrderServiceImpl implements OrderService{
 
-        @Autowired
-        private OrderMasterRepository orderMasterRepository;
-
-        @Autowired
-        private ProductService productService;
-
-        @Autowired
-        private OrderDetailRepository orderDetailRepository;
-
-        @Autowired
-        private PayService payService;
+    @Autowired
+    private OrderMasterRepository orderMasterRepository;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
+    @Autowired
+    private PayService payService;
+    @Autowired
+    private PushMessageService pushMessageService;
 
     /**
      * 创建订单
@@ -68,6 +69,7 @@ public class OrderServiceImpl implements OrderService{
             ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
             if(productInfo==null){
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+                //throw new ResponseBankException();
             }
             //2.计算订单总金额
             totalPrice = productInfo.getProductPrice().multiply(new BigDecimal(orderDetail.getProductQuantity())).add(totalPrice);
@@ -185,6 +187,8 @@ public class OrderServiceImpl implements OrderService{
             log.error("【完结订单】更新失败，orderMaster={}",orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+        //推送微信模板消息
+        pushMessageService.orderStatus(orderDTO);
         return orderDTO;
     }
 

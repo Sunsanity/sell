@@ -23,6 +23,8 @@ public enum ResultEnum {
     CANCEL_ORDER_SUCCESS(22,"取消订单成功"),
     FINISH_ORDER_SUCCESS(23,"完结订单成功"),
     PRODUCT_STATUS_RRROR(24,"商品状态不正确"),
+    LOGIN_ERROR(25,"登录失败，openid有误"),
+    LOGOUT_SUCCESS(26,"登出成功")
     ;
 
     private Integer code;
